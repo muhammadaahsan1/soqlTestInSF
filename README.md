@@ -16,3 +16,17 @@ The `sfdx-project.json` file contains useful configuration information for your 
 - [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
 - [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
 - [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+
+
+>Salesforce Object Query Language
+>Query data from Salesforce objects 
+>Filter results from large set of data, that is needed
+>Similar to SQL but is easier as SOQL doesn’t involve joints
+>SOQL queries can be done either by writing soql queries in the query editor inside the developer console, the second way is : File>Open Resource> Select object>Select fields using Ctrl if multiple and you will be able to query them > then tap on execute below
+>In SOQL queries you always give API names of the fields rather than their label (IMPORTANT)==> Account Name is field label while its API name will be Name hence Name will be used
+>Imp: With custom object append the __c with the objects as well as with fields of custom objects
+
+Important Commands for VS Code
+
+>Ctrl+Shift+P > Execute soql with selected text
+>To run soql commands using command line: sfdx force:data:soql:query -q "Select Id, Name FROM Account"

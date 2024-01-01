@@ -104,10 +104,10 @@
 // Child to Parent
 // (Main object is Child Object (e.g. Student) and you will also query the parent fields from the same query itself, e.g. when you are getting the child data like student name, student id plus you also want to get the student’s school name, or student school’s city so this is child to parent relationship query, Note that in this type you will only held one single parent record
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Hot';
+SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Hot'
 
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold';
+SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold'
 
 SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' AND Industry='Biotechnology'
 
