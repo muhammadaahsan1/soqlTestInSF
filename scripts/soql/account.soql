@@ -11,115 +11,147 @@
 // SOQL queries can be done either by writing soql queries in the query editor inside the developer console, the second way is : File>Open Resource> Select object>Select fields using Ctrl if multiple and you will be able to query them > then tap on execute below
 // In SOQL queries you always give API names of the fields rather than their label (IMPORTANT)==> Account Name is field label while its API name will be Name hence Name will be used
 // Imp: With custom object append the __c with the objects as well as with fields of custom objects
+// NOTE: Remove the semicolon sign after each query to run them, as they just helped in proper commenting of this file
+
 
 // Build a simple SOQL Query
+    SELECT Id, Name, Phone, Industry, Rating FROM Account;
 
 // SOQL with Standard Object  (Account and Contact where Account is the parent)
 
-// Filtering Records using SOQL >WHERE, AND
+    // Filtering Records using SOQL >WHERE, AND
 
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Hot'
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold'
+         SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Hot' ;
+         SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold';
 
-// AND Operator in SOQL
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' AND Industry='Biotechnology' 
+    //AND Operator in SOQL
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' AND Industry='Biotechnology'; 
 
-// OR Operator in SOQL
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' OR Industry='Biotechnology' 
+    // OR Operator in SOQL
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' OR Industry='Biotechnology';
 
-// Using AND and OR Operator in SOQL
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Biotechnology') AND Phone=’(650) 867-3450’ 
+    // Using AND and OR Operator in SOQL
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Biotechnology') AND Phone=’(650) 867-3450’ ;
 
-// Using AND and OR Operator in SOQL
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Transportation') AND Phone='(503) 421-7800' 
+    // Using AND and OR Operator in SOQL
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Transportation') AND Phone='(503) 421-7800'; 
 
-// Using Multiple OR in SOQL
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry = 'Biotechnology' OR Industry = 'Consulting' OR Industry='Hospitality'
+    // Using Multiple OR in SOQL
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry = 'Biotechnology' OR Industry = 'Consulting' OR Industry='Hospitality';
 
-// Using IN Operator in SOQL
-// Instead of writing multiple OR, we can use IN to match against various records
-// SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry IN ('Consulting','Industry','Hospitality','Energy')
+    // Using IN Operator in SOQL
+        // Instead of writing multiple OR, we can use IN to match against various records
+         SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry IN ('Consulting','Industry','Hospitality','Energy');
 
-// Using LIKE Operator in SOQL
-// Provides a mechanism for matching partial text strings and includes support for wildcards (%, _), %>matches zero or more characters, _ > matches only one character, The text string in the specified value must be enclosed in single quotes
-// SELECT Name, Industry, Rating, Phone FROM Account WHERE Name LIKE 'G%'
+    // Using LIKE Operator in SOQL
+        // Provides a mechanism for matching partial text strings and includes support for wildcards (%, _), %>matches zero or more characters, _ > matches only one character, The text string in the specified value must be enclosed in single quotes
+        SELECT Name, Industry, Rating, Phone FROM Account WHERE Name LIKE 'G%';
+        SELECT Name, Industry, Rating, Phone FROM Account WHERE Name LIKE 'B_r%';
 
-// SELECT Name, Industry, Rating, Phone FROM Account WHERE Name LIKE 'B_r%'
+    // ORDER BY in SOQL
+        SELECT Name, Industry, Rating, Phone FROM Account ORDER BY Name Asc;
+        SELECT Name, Industry, Rating, Phone FROM Account ORDER BY Name DESC;
 
-// ORDER BY in SOQL
-// SELECT Name, Industry, Rating, Phone FROM Account ORDER BY Name Asc
+    // WHERE alongwith ORDER BY
+        SELECT Name, Industry, Rating, Phone FROM Account WHERE Industry='Energy' ORDER BY Name DESC;
 
-// SELECT Name, Industry, Rating, Phone FROM Account ORDER BY Name DESC
-
-// WHERE alongwith ORDER BY
-// SELECT Name, Industry, Rating, Phone FROM Account WHERE Industry='Energy' ORDER BY Name DESC
 
 // SOQL with Custom Object (DeliveryLocation (Child) and DeliverySchedule (Parent), where DeliveryLocation object has the lookup relationship on the DeliveryLocation object)
 
 // Make sure to add __c (double underscore c), both with objects and fields
 
-// Querying custom fields from a custom object
-// SELECT Id, Name, Type_of_Location__c, Terrain__c FROM DeliveryLocation__c
+    // Querying custom fields from a custom object
+        SELECT Id, Name, Type_of_Location__c, Terrain__c FROM DeliveryLocation__c;
 
-// Comparison Operators in SOQL
-// SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE ParkingCost__c<100
-// SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE ParkingCost__c<=100
-// SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE ParkingCost__c=100
-// SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City')
+    // Comparison Operators in SOQL
+        SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE ParkingCost__c<100;
+        SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE ParkingCost__c<=100;
+        SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE ParkingCost__c=100;
+        SELECT Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City');
 
-// Date Literals in SOQL
-// SELECT Id, Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City') AND CreatedDate=TODAY
+    // Date Literals in SOQL
+        SELECT Id, Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City') AND CreatedDate=TODAY;
 
-// Limit the nr. Of records in resultset in SOQL
-// SELECT Id, Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City') LIMIT 4
+    // Limit the nr. Of records in resultset in SOQL
+        SELECT Id, Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City') LIMIT 4;
 
-// OFFSET Keyword in SOQL
-// OFFSET is used to skip initial results, e.g. OFFSET=5 so the first 5 results will be removed
+    // OFFSET Keyword in SOQL
+        //OFFSET is used to skip initial results, e.g. OFFSET=5 so the first 5 results will be removed
+        SELECT Id, Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City') OFFSET 2;
 
-// SELECT Id, Name, Type_of_Location__c, Terrain__c, ParkingCost__c FROM DeliveryLocation__c WHERE Type_of_Location__c NOT IN ('City', 'Main City') OFFSET 2
+    // Relationship Queries
+        //Query for more than one single type records (However the objects containing these records must be related to each other either via lookup field or master-detail field)
+        // It involves inner soql queries as well as outer soql queries
 
-// Relationship Queries
+        // E.g. 
+            // >School (Parent Obj) and Student (child obj); student object has a lookup field to School
+            // >Company(Parent Obj) and Contact(Child Obj); contact object has a lookup field to company
+            // >School to Company>These two objects are not related to each other anyhow>hence we can’t write SOQL relationship queries on these  two objects
 
-// Query for more than one single type records (However the objects containing these records must be related to each other either via lookup field or master-detail field)
-// It involves inner soql queries as well as outer soql queries
-
-// E.g. 
-// >School (Parent Obj) and Student (child obj); student object has a lookup field to School
-// >Company(Parent Obj) and Contact(Child Obj); contact object has a lookup field to company
-// >School to Company>These two objects are not related to each other anyhow>hence we can’t write SOQL relationship queries on these  two objects
-
-// 2 main types of Relationship Queries (Parent to Child, Child to Parent)
-// Parent to Child 
-// (Main object is Parent Object (e.g. School) and you will be getting all the related students records for each school, Note for every single parent record there will be multiple child records)
+        // 2 main types of Relationship Queries (Parent to Child, Child to Parent)
+        // Parent to Child 
+        // (Main object is Parent Object (e.g. School) and you will be getting all the related students records for each school, Note for every single parent record there will be multiple child records)
 
 // Parent to Child Relationship queries on the standard objects
-// When we will do parent to child relationship queries on standard object> we will use the child relationship name from the child object i.e. Object Manager>Child Object (Contact)>Fields and Relationships>see the lookup field i.e. Account Name>open it > you will find the child relationship name as ‘Contacts’
-// SELECT Name, BillingCity, (SELECT Name, Email FROM Contacts) FROM Account
-// SELECT Name, BillingCity, (SELECT Name, Email FROM Contacts WHERE Name LIKE 'A%') FROM Account
+    // When we will do parent to child relationship queries on standard object> we will use the child relationship name from the child object i.e. Object Manager>Child Object (Contact)>Fields and Relationships>see the lookup field i.e. Account Name>open it > you will find the child relationship name as ‘Contacts’
+        SELECT Name, BillingCity, (SELECT Name, Email FROM Contacts) FROM Account;
+        SELECT Name, BillingCity, (SELECT Name, Email FROM Contacts WHERE Name LIKE 'A%') FROM Account;
 
 // Parent to Child Relationship queries on the custom objects
-// Parent: Scheduled Delivery, Child: DeliveryLocations
-// SELECT Id, Name, (SELECT Name, Terrain__c FROM DeliveryLocations_del__r)FROM DeliverySchedule__c
+    // Parent: Scheduled Delivery, Child: DeliveryLocations
+        SELECT Id, Name, (SELECT Name, Terrain__c FROM DeliveryLocations_del__r)FROM DeliverySchedule__c;
 
-// Child to Parent
-// (Main object is Child Object (e.g. Student) and you will also query the parent fields from the same query itself, e.g. when you are getting the child data like student name, student id plus you also want to get the student’s school name, or student school’s city so this is child to parent relationship query, Note that in this type you will only held one single parent record
+    // Child to Parent
+        // (Main object is Child Object (e.g. Student) and you will also query the parent fields from the same query itself, e.g. when you are getting the child data like student name, student id plus you also want to get the student’s school name, or student school’s city so this is child to parent relationship query, Note that in this type you will only held one single parent record
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Hot'
+         //Child to Parent
+            //(Main object is Child Object (e.g. Student) and you will also query the parent fields from the same query itself, e.g. when you are getting the child data like student name, student id plus you also want to get the student’s school name, or student school’s city so this is child to parent relationship query, Note that in this type you will only held one single parent record for one single student record, no multiple records here)
+            //Child to Parent Relationship queries on the standard objects
+                //When we will do child to parent relationship queries on standard object> we will use the paren field field name from the child object i.e. Object Manager>Child Object (Contact)>Fields and Relationships>see the lookup field i.e. Account Name>open it > you will find the Field Name as ‘Account’
+                //  Child: Contact, Parent: Account
+
+        //Child to Parent Relationship queries on the custom objects
+            //When we will do child to parent relationship queries on standard object> we will use the paren field API name from the child object i.e. Object Manager>Child Object (DeliveryLocations)>Fields and Relationships>see the lookup field i.e. Delivery Schedules>open it > you will find the API Name as ‘DeliverySchedule__c’
+
+            //SELECT Id, Name, DeliverySchedule__r.Name, DeliverySchedule__r.City_of_DeliverySchedule__c FROM DeliveryLocation__c
 
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold'
+    //Aggregate Queries in SOQL>using aggregate function in SOQL> without using GROUP BY
+        SELECT SUM(ParkingCost__c) FROM DeliveryLocation__c
+        SELECT AVG(ParkingCost__c) FROM DeliveryLocation__c
+        SELECT MIN(ParkingCost__c) FROM DeliveryLocation__c
+        SELECT MAX(ParkingCost__c) FROM DeliveryLocation__c
+        SELECT COUNT(Id) FROM DeliveryLocation__c ;
+        SELECT Type FROM Account;
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' AND Industry='Biotechnology'
+        SELECT COUNT(Id) FROM Account WHERE Type = 'Customer - Channel';
+        SELECT COUNT(Id), Type FROM Account GROUP BY Type HAVING COUNT(Id) < 7;
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' OR Industry='Biotechnology'
+    //Group by along with aggregate makes sense
+        //Using group by and aggregate in the same custom object
+            SELECT Type_of_Location__c, COUNT(Id) FROM DeliveryLocation__c GROUP BY Type_of_Location__c ;
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Biotechnology') AND Phone='(650) 867-3450'
+        //Using group by and aggregate utilizing a field from the parent object on the child object
+            SELECT DeliverySchedule__r.Name, COUNT(Id) FROM DeliveryLocation__c GROUP BY DeliverySchedule__r.Name;
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Transportation') AND Phone='(503) 421-7800'
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry = 'Biotechnology' OR Industry = 'Consulting' OR Industry='Hospitality'
 
-SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry IN ('Consulting','Industry','Hospitality','Energy')
+//Having
+
+SELECT AccountId, COUNT(Id) FROM Opportunity GROUP BY AccountId HAVING COUNT(Id) < 7;
+//This query is selecting the AccountId and the count of Opportunities for each AccountId. It then filters the results to only include those with less than 7 Opportunities.
+
+      //-------------------------------------------------------------------------------// 
+       
+       
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Hot';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' AND Industry='Biotechnology';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Rating='Cold' OR Industry='Biotechnology';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Biotechnology') AND Phone='(650) 867-3450';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE (Rating='Cold' OR Industry='Transportation') AND Phone='(503) 421-7800';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry = 'Biotechnology' OR Industry = 'Consulting' OR Industry='Hospitality';
+        SELECT Id, Name, Phone, Industry, Rating FROM Account WHERE Industry IN ('Consulting','Industry','Hospitality','Energy')
 
 SELECT Name, Industry, Rating, Phone FROM Account WHERE Name LIKE 'G%'
 
